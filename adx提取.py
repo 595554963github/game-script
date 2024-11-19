@@ -23,7 +23,8 @@ def extract_files_with_conditions(path):
                         break
 
                     # 检查从找到的b'\x80\x00'开始的10个字节里面是否包含固定序列
-                    if b'\x03\x12\x04\x02\x00\x00' in content[header_start_index:header_start_index + 10]:
+                    if (b'\x03\x12\x04\x01\x00\x00' in content[header_start_index:header_start_index + 10]) or (
+                            b'\x03\x12\x04\x02\x00\x00' in content[header_start_index:header_start_index + 10]):
                         next_header_index = content.find(b'\x80\x00', header_start_index + 1)
                         if current_header_start is None:
                             current_header_start = header_start_index
